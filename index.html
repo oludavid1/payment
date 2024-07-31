@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Gateway Modal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <style></style>
+</head>
+
+<body>
+    <div class="centered-container">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal">
+            Make Payment
+        </button>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Payment Gateway</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Preloader -->
+                    <div class="preloader d-none">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="paymentTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="card-tab" data-toggle="tab" href="#card" role="tab"
+                                aria-controls="card" aria-selected="true">Credit Card</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" id="bank-tab" data-toggle="tab" href="#bank" role="tab"
+                                aria-controls="bank" aria-selected="false">Bank Transfer</a>
+                        </li>
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tab-content" id="paymentTabContent">
+                        <!-- Card Payment Details -->
+                        <div class="tab-pane fade show active" id="card" role="tabpanel" aria-labelledby="card-tab">
+                            <form id="paymentForm">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input type="number" class="form-control" id="cardNumber"
+                                        placeholder="1234 5678 9101 1121" min="1000000000000000" max="9999999999999999"
+                                        required />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="expiryDate">Expiry Date</label>
+                                        <input type="number" class="form-control" id="expiryDate" placeholder="MM/YY"
+                                            pattern="\d{2}/\d{2}" required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="cvv">CVV</label>
+                                        <input type="number" class="form-control" id="cvv" placeholder="123" min="100"
+                                            max="999" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardName">Card Holder Name</label>
+                                    <input type="text" class="form-control" id="cardName" placeholder="John Doe"
+                                        required />
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Bank Transfer Payment Details -->
+                        <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+                            <form id="paymentForm">
+                                <div class="form-group">
+                                    <label for="accountNumber">Account Number</label>
+                                    <input type="number" class="form-control" id="accountNumber" placeholder="1234567890"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="bankName">Bank Name</label>
+                                    <input type="text" class="form-control" id="bankName" placeholder="Your Bank Name"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="ifscCode">Account Name</label>
+                                    <input type="text" class="form-control" id="ifscCode" placeholder="Account Name"
+                                        required />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pay-now-btn">
+                        Pay Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#expiryDate").mask("00/00");
+            // Handle tab change event
+            $('#paymentTab a[data-toggle="tab"]').on("click", function () {
+                // Show preloader
+                $(".preloader").removeClass("d-none");
+
+                // Simulate a delay for preloader (e.g., 1 second)
+                setTimeout(function () {
+                    // Hide preloader
+                    $(".preloader").addClass("d-none");
+                }, 2000); // Adjust this delay as needed
+            });
+        });
+    </script>
+</body>
+
+</html>
